@@ -1,12 +1,18 @@
 from rich.console import Console
+from data_storage import read_data, write_data
 
 console = Console()
 
 class DeliveryManager:
     def __init__(self):
-        self.delivery_agents = []  # Agents will be dynamically assigned
+        # No need to store state as we'll read from file each time
+        pass
 
-    def update_order_status(self, orders):
+    def update_order_status(self):
+        # Read fresh data
+        data = read_data()
+        orders = data["orders"]
+        
         if not orders:
             console.print("[bold red]No orders available for delivery.[/bold red]")
             return
@@ -19,7 +25,7 @@ class DeliveryManager:
             console.print("[bold red]Invalid Order ID. Please enter a number.[/bold red]")
             return
 
-        for order in orders:
+        for i, order in enumerate(orders):
             if order["id"] == order_id:
                 if order["type"] == "Takeaway":
                     console.print("[bold yellow]This is a takeaway order and is already completed.[/bold yellow]")
@@ -59,6 +65,11 @@ class DeliveryManager:
                     # **Valid Status Change**
                     order["status"] = new_status.capitalize()
                     order["delivery_agent"] = agent_name  # Auto-assign delivery agent
+                    
+                    # Update the order in the data and write back to file
+                    data["orders"][i] = order
+                    write_data(data)
+                    
                     console.print(f"[bold green]Order {order_id} status updated to '{order['status']}' by {agent_name}.[/bold green]")
                     return
 

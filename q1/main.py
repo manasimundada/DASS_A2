@@ -2,10 +2,14 @@ from rich.console import Console
 from order import OrderManager
 from delivery import DeliveryManager
 from restaurant import RestaurantManager
+from data_storage import initialize_data
 
 console = Console()
 
 def main():
+    # Initialize the data file if it doesn't exist
+    initialize_data()
+    
     order_manager = OrderManager()
     delivery_manager = DeliveryManager()
     restaurant_manager = RestaurantManager()
@@ -45,7 +49,7 @@ def main():
 
                 choice = input("\nSelect an option: ").strip()
                 if choice == "1":
-                    restaurant_manager.view_orders(order_manager.orders)
+                    restaurant_manager.view_orders()
                 elif choice == "2":
                     break
                 else:
@@ -59,7 +63,7 @@ def main():
 
                 choice = input("\nSelect an option: ").strip()
                 if choice == "1":
-                    delivery_manager.update_order_status(order_manager.orders)
+                    delivery_manager.update_order_status()
                 elif choice == "2":
                     break
                 else:
