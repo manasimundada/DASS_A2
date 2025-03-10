@@ -1,0 +1,58 @@
+classDiagram
+    class User {
+        +int user_id
+        +string name
+        +string email
+        +string password
+        +void login()
+        +void register()
+    }
+
+    class Customer {
+        +string address
+        +bool isRetailer
+        +float discount
+        +void placeOrder(Order order)
+        +void viewOrders()
+    }
+
+    class Product {
+        +int product_id
+        +string name
+        +string category
+        +float price
+        +int stock
+        +void updateStock(int quantity)
+    }
+
+    class Order {
+        +int order_id
+        +Customer customer
+        +list<Product> items
+        +float total_price
+        +string status
+        +void confirmOrder()
+        +void cancelOrder()
+    }
+
+    class Delivery {
+        +int delivery_id
+        +Order order
+        +string delivery_status
+        +string estimated_time
+        +void updateStatus(string status)
+    }
+
+    class DiscountCoupon {
+        +int coupon_id
+        +Customer customer
+        +float discount_percentage
+        +string expiry_date
+        +bool isValid()
+    }
+
+    User <|-- Customer
+    Customer "1" -- "*" Order
+    Order "1" -- "*" Product
+    Order "1" -- "1" Delivery
+    Customer "1" -- "*" DiscountCoupon
