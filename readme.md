@@ -197,3 +197,130 @@ The test suite covers all major components of the online food delivery system: R
 - Complete view of all orders in the system
 - Ability to modify menu items and pricing
 - Order monitoring across all statuses
+
+# **Q2: Gobblet Jr. Board Game**
+### **Overview**
+Gobblet Jr. is a 3x3 board game based on the tic-tac-toe concept. Players use three sizes of pieces to cover smaller ones.
+
+### **Implementation Details**
+- **Pygame-based UI**
+- **Supports move validation, piece stacking, and win detection**
+- **Interactive drag-and-drop gameplay**
+- **Turn-based mechanics**
+
+### **Linting & Code Improvements**
+1. **Initial Lint Report (Score: 6.93/10)** - Issues included:
+   - Trailing whitespaces
+   - Long lines exceeding 100 characters
+   - Missing docstrings
+   - Too many nested blocks
+
+2. **Iteration 2 (Score: 7.39/10)** - Fixes:
+   - Removed unnecessary else-after-return
+   - Reduced argument count in functions
+   - Fixed variable naming issues
+
+3. **Iteration 3 (Score: 7.64/10)** - Fixes:
+   - Added missing docstrings
+   - Reduced nested blocks
+   - Improved readability
+
+4. **Final Iteration (Score: 7.82/10)** - Fixes:
+   - Removed unused variables
+   - Optimized function complexity
+   - Improved PEP8 compliance
+
+### **How to Run Gobblet Jr.**
+```bash
+python gobbletfinal.py
+```
+
+### **How to Run Pylint Analysis**
+```bash
+pylint gobbletfinal.py
+```
+
+---
+
+# Q3: Dollmart E-Marketing System
+
+## Overview
+This implementation of the Dollmart e-marketing system provides a command-line interface (CLI) for customers to browse products, place orders, and manage their shopping experience. The system follows object-oriented design principles and is represented visually using a UML class diagram.
+
+## System Features
+- **User Management**: Registration and login for customers
+- **Customer Types**: Support for both regular customers and retailers with different pricing
+- **Shopping Cart**: Add, remove, and view items in cart
+- **Order Processing**: Place orders and track status
+- **Discount System**: Loyalty points and discount coupons
+- **Delivery Tracking**: Order delivery status updates
+
+## UML Class Diagram
+The UML diagram (located in `uml/diagram.mmd`) represents the class structure of the system:
+- **User**: Base class with authentication functionality
+- **Customer**: Extends User with shopping capabilities and retailer status
+- **Product**: Represents items with regular and retailer pricing
+- **Order**: Handles order creation and processing
+- **Delivery**: Manages delivery status and timeframes
+- **DiscountCoupon**: Implements the coupon discount functionality
+
+## Implementation Details
+The main system is implemented in `src/dollmarket.py` and includes:
+- Class implementations for all entities in the UML diagram
+- A CLI menu system for user interaction
+- Sample data for demonstration purposes
+- Authentication and authorization
+- Shopping cart functionality
+- Order placement and processing
+- Discount and loyalty system
+
+## Testing
+The system has comprehensive test coverage using PyTest. Tests are organized by functionality:
+
+### Test Organization
+- **test_user.py**: Tests user creation and authentication
+- **test_product.py**: Tests product creation and inventory management
+- **test_order.py**: Tests order processing and discounts
+- **test_delivery.py**: Tests delivery status management
+- **test_cart.py**: Tests shopping cart operations
+- **test_integration.py**: Tests end-to-end workflows
+- **test_edge_cases.py**: Tests handling of boundary conditions
+
+### Test Coverage
+1. **User Management**:
+   - User and customer creation
+   - Regular vs. retailer customer differences
+   - Loyalty points calculation
+
+2. **Product Management**:
+   - Product creation and attributes
+   - Stock updates and inventory checks
+   - Different pricing for retailers
+
+3. **Shopping Cart**:
+   - Adding items to cart
+   - Updating quantities
+   - Removing items
+   - Viewing cart contents
+
+4. **Order Processing**:
+   - Creating orders from cart
+   - Order confirmation
+   - Applying customer discounts
+   - Using discount coupons
+
+5. **Delivery**:
+   - Creating deliveries for orders
+   - Updating delivery status
+
+6. **Edge Cases**:
+   - Empty cart orders
+   - Out-of-stock products
+   - Multiple discount applications
+   - Minimum order requirements for discounts
+
+7. **Integration Tests**:
+   - Complete shopping workflow
+   - Retailer discount workflow
+   - Coupon application workflow
+

@@ -1,0 +1,19 @@
+{
+    "menu": {
+        "burger": 150.0,
+        "pizza": 300.0,
+        "pasta": 250.0,
+        "salad": 120.0,
+        "coke": 50.0,
+        "water": 20.0,
+        "fries": 100.0,
+        "chicken wings": 200.0,
+        "ice cream": 80.0,
+        "coffee": 60.0
+    },
+    "orders": [],
+    "delivery_agents": [
+        "bob"
+    ],
+    "next_order_id": 1001
+}

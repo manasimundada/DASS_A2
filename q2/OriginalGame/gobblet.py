@@ -30,11 +30,7 @@ pygame.display.set_caption("Gobblet Jr. (3x3)")
 # --------------------------------------------------------------------------------
 
 class Piece:
-    """
-    Represents a single piece with a color and size.
-      color: 'red' or 'green'
-      size: 0 = small, 1 = medium, 2 = large
-    """
+
     def __init__(self, color, size):
         self.color = color
         self.size = size
@@ -43,9 +39,7 @@ class Piece:
         # We'll adjust rect size visually based on piece size.
 
     def draw(self, surface, pos):
-        """
-        Draw the piece on the given surface at position `pos` (center).
-        """
+
         if self.color == 'red':
             c = RED_COLOR
         else:
@@ -58,13 +52,7 @@ class Piece:
         pygame.draw.circle(surface, c, pos, radius)
 
 class GameState:
-    """
-    Holds the entire state of the 3x3 Gobblet Jr. game:
-      - board: a 3x3 array (list of lists), where each cell is a list of pieces (bottom->top).
-      - next_player: 'red' or 'green' to indicate whose turn it is.
-      - off_board_pieces: dictionary tracking how many pieces each player has left off the board
-        e.g. off_board_pieces['red'] = {0:2, 1:2, 2:2} for small=2, med=2, large=2
-    """
+
     def __init__(self):
         # 3x3 board; each cell is a stack (list) of pieces bottom->top
         self.board = [[[] for _ in range(COLS)] for _ in range(ROWS)]
@@ -90,10 +78,6 @@ class GameState:
             self.next_player = 'red'
 
     def cell_coords_to_index(self, x, y):
-        """
-        Convert (mouse_x, mouse_y) in screen coords to board cell (row, col) index.
-        Returns (row, col) or None if out of bounds.
-        """
         # Subtract offset
         board_x = x - BOARD_OFFSET_X
         board_y = y - BOARD_OFFSET_Y
@@ -105,16 +89,12 @@ class GameState:
         return None
 
     def top_piece_at(self, row, col):
-        """
-        Return the top piece at board[row][col], or None if empty.
-        """
+
         stack = self.board[row][col]
         return stack[-1] if stack else None
 
     def place_piece(self, piece, dest_row, dest_col):
-        """
-        Place or move the piece onto the cell. We assume the move is valid.
-        """
+
         # Gobbling check: can only place on top if top piece is smaller
         top = self.top_piece_at(dest_row, dest_col)
         if top is None or top.size < piece.size:
@@ -125,18 +105,13 @@ class GameState:
         return False
 
     def remove_top_piece(self, row, col):
-        """
-        Remove and return the top piece from the board cell.
-        """
+
         if self.board[row][col]:
             return self.board[row][col].pop()
         return None
 
     def has_three_in_a_row(self, color):
-        """
-        Check if `color` has 3 in a row among visible (top) pieces.
-        Return True if so, else False.
-        """
+
         # We can check each row, column, diagonal for 3 in a row
         # but we must only consider the topmost piece in each cell.
         visible = [[None for _ in range(COLS)] for _ in range(ROWS)]
@@ -190,13 +165,7 @@ class GameState:
         return False
 
     def check_exposed_opponent_win(self, removed_row, removed_col, placed_row, placed_col, moving_color):
-        """
-        If removing a piece from (removed_row, removed_col) exposes a 3-in-a-row for the opponent,
-        and the new placement at (placed_row, placed_col) does not cover that 3-in-a-row,
-        then the opponent wins immediately.
 
-        Return the winning color if there's an immediate forced win, else None.
-        """
         # The opponent color
         opponent = 'green' if moving_color == 'red' else 'red'
 
@@ -229,9 +198,7 @@ class GameState:
         return None
 
     def check_for_winner(self):
-        """
-        After a valid move, check if current player (or forced opponent scenario) has won.
-        """
+
         # Check if the current player has 3 in a row
         if self.has_three_in_a_row(self.next_player):
             self.game_over = True
@@ -260,10 +227,7 @@ class GameState:
                     top_piece.draw(surface, (center_x, center_y))
 
     def draw_off_board_pieces(self, surface):
-        """
-        Draw placeholders for off-board pieces (so players can click/drag them).
-        We'll arrange them along the left side for Red and right side for green, for example.
-        """
+
         # Off-board for red on left
         # Off-board for green on right
         start_x_red = 50  # Adjusted to provide more space
@@ -299,9 +263,7 @@ class GameState:
                 start_y_green += gap
 
     def print_debug(self):
-        """
-        Print a small text status if you like debugging in the console.
-        """
+
         pass
 
 # --------------------------------------------------------------------------------
