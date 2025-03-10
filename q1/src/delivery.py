@@ -61,7 +61,8 @@ class DeliveryManager:
                         console.print("[bold red]This order is already out for delivery and must be marked as 'Delivered' next.[/bold red]")
                         continue
 
-                    order["status"] = new_status.capitalize()
+                    # Ensure proper capitalization for status words
+                    order["status"] = ' '.join(word.capitalize() for word in new_status.split())
                     console.print(f"[bold green]Order {order_id} status updated to '{order['status']}' by {agent_name.capitalize()}.[/bold green]")
                     write_json(data)  # Save changes after updating status
                     return
